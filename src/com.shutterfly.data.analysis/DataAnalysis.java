@@ -51,6 +51,7 @@ public class DataAnalysis {
 		for(int i = 0; i < actions.length; i++){
 			json = actions[i].getAsJsonObject();
 			Timestamp ts = Timestamp.valueOf(json.get("event_time").getAsString().replace("T", " ").replace("Z", ""));
+			//Only process the input events within this week time range which set above.
 			if(ts.after(timestamp2) || ts.before(timestamp1)){
 				continue;
 			}
@@ -64,7 +65,7 @@ public class DataAnalysis {
 			}else if(json.get("type").getAsString().equalsIgnoreCase("ORDER") && json.get("verb").getAsString().equalsIgnoreCase("NEW")){
 				id = json.get("customer_id").getAsString();
 				amount = Double.valueOf(json.get("total_amount").getAsString().replaceAll("[^0-9.]", ""));
-				amount += (double)map.get(id);
+				amount += (double)map.get(id);//Use this total amount as the value per week.
 				map.replace(id, amount);
 			}
 		}
