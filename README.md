@@ -6,3 +6,6 @@ When the data size is huge and considering the performance, extracting and updat
 
 Put one event in one line for the convenience of read input.
 Output customer_id and lifetime_value pairs rather than using customer names, because it is easier for the following use, such as extract customer info from database and update any table using customer_id as a key.
+
+
+Here used an external jar: gson-2.3.1.jar
